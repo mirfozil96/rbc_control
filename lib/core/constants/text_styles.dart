@@ -22,7 +22,6 @@ final class TextStyles{
       color: AppColors.dark,
   );
 
-
   TextStyle? get paragraph => TextStyle(
     fontFamily: "DM_Sans",
     fontWeight: FontWeight.w400,

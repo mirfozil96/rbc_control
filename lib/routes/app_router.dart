@@ -5,12 +5,12 @@ import "package:rbc_control/presentation/views/auth/forget_password_reset_page.d
 import "package:rbc_control/presentation/views/auth/login_page.dart";
 import "package:rbc_control/presentation/views/auth/register_page.dart";
 import "package:rbc_control/presentation/views/auth/set_new_password_page.dart";
-import "package:rbc_control/presentation/views/onboarding/onboarding_page.dart";
+import "package:rbc_control/presentation/views/onboarding/onboarding_view.dart";
 import "package:rbc_control/presentation/views/welcome/otp_verification_page.dart";
 import "package:rbc_control/presentation/views/welcome/welcome_mobile_page.dart";
-import "../presentation/views/home/home_view.dart";
-import "../presentation/views/profile/profile_view.dart";
-import "../presentation/views/splash_screen.dart";
+// import "../presentation/views/home/home_view.dart";
+// import "../presentation/views/profile/profile_view.dart";
+// import "../presentation/views/splash_screen.dart";
 import "app_route_name.dart";
 
 // final class AppRouter {
@@ -58,7 +58,7 @@ final class AppRouter {
       GoRoute(
         path: AppRouteName.onboarding,
         builder: (BuildContext context, GoRouterState state) =>
-            OnboardingPage(),
+           const OnboardingView(),
       ),
 
       GoRoute(

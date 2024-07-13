@@ -1,11 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../viewmodels/onboarding_viewmodel.dart';
-
-
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../widgets/custom_bottom_navigation_bar.dart';
 
@@ -14,8 +7,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const Center(
+    return const Scaffold(
+      body: Center(
         child: Text('Home View'),
       ),
       bottomNavigationBar: CustomBottomNavigationBar(),

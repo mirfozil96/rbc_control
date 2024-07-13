@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:rbc_control/src/core/routes/app_router.dart";
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -15,33 +16,14 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(360, 800),
+      designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (BuildContext context, Widget? child) {
-        return const MaterialApp(
-          home: HomePage(),
+        return  MaterialApp.router(
+          routerConfig: AppRouter.router,
         );
       },
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home Page'),
-      ),
-      body: const Center(
-        child: Text(
-          'Welcome to My App!',
-          style: TextStyle(fontSize: 24.0),
-        ),
-      ),
     );
   }
 }

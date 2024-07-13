@@ -38,7 +38,8 @@ dependencies:
   d_navigation_bar: ^0.0.1
   path_provider: ^2.1.3
   image_picker: ^1.1.2
-# pinput
+
+  # pinput
   pinput: ^5.0.0
   email_otp: ^3.0.1
 
@@ -59,13 +60,11 @@ dev_dependencies:
 
 
 flutter:
-
-
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - assets/images
+  # assets:
+  #   - assets/images
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

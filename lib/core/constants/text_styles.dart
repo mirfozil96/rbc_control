@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rbc_control/core/constants/app_colors.dart';
 
 @immutable
-final class TextStyles extends TextTheme{
+final class TextStyles{
   static const TextStyle heading = TextStyle(
     fontSize: 24.0,
     fontWeight: FontWeight.bold,
@@ -15,7 +15,6 @@ final class TextStyles extends TextTheme{
     color: Colors.black,
   );
 
-  @override
   TextStyle? get headline1 => TextStyle(
       fontFamily: "DM_Sans",
       fontWeight: FontWeight.w700,
@@ -23,7 +22,7 @@ final class TextStyles extends TextTheme{
       color: AppColors.dark,
   );
 
-  @override
+
   TextStyle? get paragraph => TextStyle(
     fontFamily: "DM_Sans",
     fontWeight: FontWeight.w400,

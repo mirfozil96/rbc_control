@@ -1,14 +1,40 @@
 import "package:flutter/material.dart";
 import "package:go_router/go_router.dart";
-import "package:rbc_control/src/feature/auth/presentation/pages/forget_password_page.dart";
-import "package:rbc_control/src/feature/auth/presentation/pages/forget_password_reset_page.dart";
-import "package:rbc_control/src/feature/auth/presentation/pages/login_page.dart";
-import "package:rbc_control/src/feature/auth/presentation/pages/register_page.dart";
-import "package:rbc_control/src/feature/auth/presentation/pages/set_new_password_page.dart";
-import "package:rbc_control/src/feature/onboarding/presentation/pages/onboarding_page.dart";
-import "package:rbc_control/src/feature/welcome/presentation/otp_verification_page.dart";
-import "package:rbc_control/src/feature/welcome/presentation/welcome_mobile_page.dart";
+import "package:rbc_control/presentation/views/auth/forget_password_page.dart";
+import "package:rbc_control/presentation/views/auth/forget_password_reset_page.dart";
+import "package:rbc_control/presentation/views/auth/login_page.dart";
+import "package:rbc_control/presentation/views/auth/register_page.dart";
+import "package:rbc_control/presentation/views/auth/set_new_password_page.dart";
+import "package:rbc_control/presentation/views/onboarding/onboarding_page.dart";
+import "package:rbc_control/presentation/views/welcome/otp_verification_page.dart";
+import "package:rbc_control/presentation/views/welcome/welcome_mobile_page.dart";
+import "../presentation/views/home/home_view.dart";
+import "../presentation/views/profile/profile_view.dart";
+import "../presentation/views/splash_screen.dart";
 import "app_route_name.dart";
+
+// final class AppRouter {
+//   static final router = GoRouter(
+//     routes: [
+//       GoRoute(
+//         path: '/',
+//         builder: (context, state) => const SplashScreen(),
+//       ),
+//       GoRoute(
+//         path: '/onboarding',
+//         builder: (context, state) => OnboardingPage(),
+//       ),
+//       GoRoute(
+//         path: '/profile',
+//         builder: (context, state) => const ProfileView(),
+//       ),
+//       GoRoute(
+//         path: '/home',
+//         builder: (context, state) => const HomeView(),
+//       ),
+//     ],
+//   );
+// }
 
 final class AppRouter {
   static GoRouter router = GoRouter(
@@ -32,7 +58,7 @@ final class AppRouter {
       GoRoute(
         path: AppRouteName.onboarding,
         builder: (BuildContext context, GoRouterState state) =>
-            const OnboardingPage(),
+            OnboardingPage(),
       ),
 
       GoRoute(

@@ -11,30 +11,10 @@ import "package:rbc_control/presentation/views/welcome/welcome_mobile_page.dart"
 // import "../presentation/views/home/home_view.dart";
 // import "../presentation/views/profile/profile_view.dart";
 // import "../presentation/views/splash_screen.dart";
+import "../presentation/views/home/home_page.dart";
+import "../presentation/views/navigation_screen.dart";
+import "../presentation/views/profile/profile_view.dart";
 import "app_route_name.dart";
-
-// final class AppRouter {
-//   static final router = GoRouter(
-//     routes: [
-//       GoRoute(
-//         path: '/',
-//         builder: (context, state) => const SplashScreen(),
-//       ),
-//       GoRoute(
-//         path: '/onboarding',
-//         builder: (context, state) => OnboardingPage(),
-//       ),
-//       GoRoute(
-//         path: '/profile',
-//         builder: (context, state) => const ProfileView(),
-//       ),
-//       GoRoute(
-//         path: '/home',
-//         builder: (context, state) => const HomeView(),
-//       ),
-//     ],
-//   );
-// }
 
 final class AppRouter {
   static GoRouter router = GoRouter(
@@ -58,39 +38,55 @@ final class AppRouter {
       GoRoute(
         path: AppRouteName.onboarding,
         builder: (BuildContext context, GoRouterState state) =>
-           const OnboardingView(),
+            const OnboardingView(),
       ),
 
+      /// login
       GoRoute(
-        path: AppRouteName.register,
-        builder: (BuildContext context, GoRouterState state) =>
-            const RegisterPage(),
+        path: AppRouteName.login,
+        builder: (BuildContext context, GoRouterState state) => LoginPage(),
         routes: [
           GoRoute(
-            path: AppRouteName.login,
+            path: AppRouteName.register,
             builder: (BuildContext context, GoRouterState state) =>
-                const LoginPage(),
+                const RegisterPage(),
+          ),
+          GoRoute(
+            path: AppRouteName.forgetPassword,
+            builder: (BuildContext context, GoRouterState state) =>
+                const ForgetPasswordPage(),
             routes: [
               GoRoute(
-                path: AppRouteName.forgetPassword,
+                path: AppRouteName.forgetPasswordResetEmail,
                 builder: (BuildContext context, GoRouterState state) =>
-                    const ForgetPasswordPage(),
+                    const ForgetPasswordResetPage(),
                 routes: [
                   GoRoute(
-                    path: AppRouteName.forgetPasswordResetEmail,
+                    path: AppRouteName.setANewPassword,
                     builder: (BuildContext context, GoRouterState state) =>
-                        const ForgetPasswordResetPage(),
-                    routes: [
-                      GoRoute(
-                        path: AppRouteName.setANewPassword,
-                        builder: (BuildContext context, GoRouterState state) =>
-                            const SetNewPasswordPage(),
-                      ),
-                    ],
+                        const SetNewPasswordPage(),
                   ),
                 ],
               ),
             ],
+          ),
+        ],
+      ),
+
+      //main
+
+      ShellRoute(
+        builder: (context, state, child) => PrimaryPage(child),
+        routes: [
+          GoRoute(
+            path: AppRouteName.home,
+            builder: (BuildContext context, GoRouterState state) =>
+                const HomeView(),
+          ),
+          GoRoute(
+            path: AppRouteName.profile,
+            builder: (BuildContext context, GoRouterState state) =>
+                const ProfileView(),
           ),
         ],
       ),

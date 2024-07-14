@@ -11,7 +11,7 @@ class HomeView extends StatelessWidget {
       body: Center(
         child: Text('Home View'),
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(),
     );
   }
 }
+

@@ -56,11 +56,14 @@ class OnboardingView extends ConsumerWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               CustomViewDot(
-                                  pageIndex: onboardingState.pageIndex, index: 0),
+                                  pageIndex: onboardingState.pageIndex,
+                                  index: 0),
                               CustomViewDot(
-                                  pageIndex: onboardingState.pageIndex, index: 1),
+                                  pageIndex: onboardingState.pageIndex,
+                                  index: 1),
                               CustomViewDot(
-                                  pageIndex: onboardingState.pageIndex, index: 2),
+                                  pageIndex: onboardingState.pageIndex,
+                                  index: 2),
                             ],
                           ),
                         ),
@@ -69,7 +72,7 @@ class OnboardingView extends ConsumerWidget {
                           text: "Next",
                           onPressed: () {
                             onboardingState.isFinal == true
-                                ? context.go(AppRouteName.register)
+                                ? context.go(AppRouteName.login)
                                 : onboardingState.pageController.nextPage(
                                     duration: const Duration(milliseconds: 500),
                                     curve: Curves.easeIn,

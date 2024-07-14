@@ -7,7 +7,6 @@ class App extends StatelessWidget {
   const App({super.key});
 
   static void run() => runApp(
-        // const App(),
         const ProviderScope(
           child: App(),
         ),
@@ -20,7 +19,7 @@ class App extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (BuildContext context, Widget? child) {
-        return  MaterialApp.router(
+        return MaterialApp.router(
           routerConfig: AppRouter.router,
         );
       },

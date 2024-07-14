@@ -4,8 +4,13 @@ import 'package:flutter_svg/svg.dart';
 
 @immutable
 sealed class AppImages {
-
   const AppImages._();
+  static SvgPicture google = SvgPicture.asset(
+    "assets/icons/google.svg",
+    height: 16,
+    width: 16,
+    fit: BoxFit.cover,
+  );
 
   ///SVG
   static final SvgPicture onboarding2 = SvgPicture.asset(
@@ -42,7 +47,6 @@ sealed class AppImages {
     width: 46.99.w,
     fit: BoxFit.cover,
   );
-
 
   ///PNG
   static final Image onboarding1 = Image.asset(

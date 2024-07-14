@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rbc_control/core/constants/app_text_styles.dart';
-import 'package:rbc_control/core/constants/images.dart';
 import '../../core/constants/app_colors.dart';
+import '../../gen/assets.gen.dart';
 
 class CustomOnboardingContainerOne extends StatelessWidget {
   const CustomOnboardingContainerOne({super.key});
@@ -110,7 +110,7 @@ class CustomOnboardingContainerOne extends StatelessWidget {
                           ),
                         ),
                       ),
-                      AppImages.onboarding1,
+                      Assets.images.onboarding1.image(height: 232.h, width: 388.w, fit: BoxFit.cover),
                     ],
                   ),
                   Container(
@@ -163,7 +163,8 @@ class CustomOnboardingContainerOne extends StatelessWidget {
                             ),
                           ),
                         ),
-                        AppImages.onboarding1TopRight,
+                        Assets.images.onboarding1TopRightIcon.svg(height: 48.87.h, width: 46.99.w, fit: BoxFit.cover),
+                        // AppImages.onboarding1TopRight,
                       ],
                     ),
                     Row(

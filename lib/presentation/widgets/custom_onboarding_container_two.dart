@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:rbc_control/core/constants/images.dart';
 import '../../core/constants/app_text_styles.dart';
+import '../../gen/assets.gen.dart';
 
 class CustomOnboardingContainerTwo extends StatelessWidget {
   const CustomOnboardingContainerTwo({super.key});
@@ -105,7 +105,7 @@ class CustomOnboardingContainerTwo extends StatelessWidget {
                           ),
                         ),
                       ),
-                      AppImages.onboarding2,
+                      Assets.images.onboarding2.svg(height: 159.h, width: 275.w, fit: BoxFit.cover),
                     ],
                   ),
                   Container(
@@ -152,7 +152,7 @@ class CustomOnboardingContainerTwo extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(40),
                               ),
                             ),
-                            AppImages.onboarding2TopLeft,
+                            Assets.images.onboarding2TopLeft.image(height: 18.h, width: 18.w, fit: BoxFit.cover),
                           ],
                         ),
                         const Spacer(),
@@ -175,7 +175,7 @@ class CustomOnboardingContainerTwo extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            AppImages.onboarding2CenterRight,
+                            Assets.images.onboarding2TopRight.image(height: 62.h, width: 62.w, fit: BoxFit.cover),
                           ],
                         ),
                       ],
@@ -202,7 +202,7 @@ class CustomOnboardingContainerTwo extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            AppImages.onboarding2Bottom,
+                            Assets.images.onboarding2Bottom.image(height: 44.h, width: 54.w, fit: BoxFit.cover),
                           ],
                         ),
                         const Spacer(flex: 2),

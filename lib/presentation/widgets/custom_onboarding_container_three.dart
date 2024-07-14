@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:rbc_control/core/constants/images.dart';
 import '../../core/constants/app_text_styles.dart';
+import '../../gen/assets.gen.dart';
 
 class CustomOnboardingContainerThree extends StatelessWidget {
   const CustomOnboardingContainerThree({super.key});
@@ -105,7 +105,7 @@ class CustomOnboardingContainerThree extends StatelessWidget {
                           ),
                         ),
                       ),
-                      AppImages.onboarding3,
+                      Assets.images.onboarding3.svg(height: 249.h, width: 260.w, fit: BoxFit.cover),
                     ],
                   ),
                   Container(
@@ -161,7 +161,7 @@ class CustomOnboardingContainerThree extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            AppImages.onboarding3Top,
+                            Assets.images.onboarding3Top.svg(height: 36.h, width: 36.w, fit: BoxFit.cover),
                           ],
                         ),
                         const Spacer(flex: 3),
@@ -186,7 +186,7 @@ class CustomOnboardingContainerThree extends StatelessWidget {
                             ),
                           ),
                         ),
-                        AppImages.onboarding3Right,
+                        Assets.images.onboarding3Right.svg(height: 38.18.h, width: 38.73.w, fit: BoxFit.cover),
                       ],
                     ),
                     Row(
@@ -210,7 +210,7 @@ class CustomOnboardingContainerThree extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            AppImages.onboarding3Bottom
+                            Assets.images.onboarding3Bottom.image(height: 18.h, width: 18.w, fit: BoxFit.cover),
                           ],
                         ),
                       ],

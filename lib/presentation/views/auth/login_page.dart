@@ -2,8 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rbc_control/core/constants/images.dart';
-
+import '../../../gen/assets.gen.dart';
 import '../../../routes/app_route_name.dart';
 import '../../widgets/custom_text_field.dart';
 import '../../widgets/sign_in_chekbox.dart';
@@ -182,7 +181,7 @@ class LoginPage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    AppImages.google,
+                    Assets.images.google.svg(height: 16, width: 16, fit: BoxFit.cover),
                     const SizedBox(width: 10),
                     Text(
                       'Continue with Google',

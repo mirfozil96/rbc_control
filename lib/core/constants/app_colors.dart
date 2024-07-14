@@ -7,9 +7,17 @@ sealed class AppColors {
   static const Color primary = Color(0xFF0A0E21);
   static const Color accent = Color(0xFFEB1555);
   static const Color background = Color(0xFFFFFFFF);
-  static const Color dark = Color(0xff1B1D21);
-  static const Color dark50 = Color.fromRGBO(0, 0, 0, 0.5);
   static const Color fD6B22 = Color(0xfffd6b22);
   static const Color lFF0000 = Color(0xffFF0000);
   static const Color lD9D9D9 = Color(0xffD9D9D9);
+
+  ///
+  static const Color white = Color(0xffFFFFFF);
+  static const Color dark = Color(0xff1B1D21);
+  static const Color dark50 = Color.fromRGBO(0, 0, 0, 0.5);
+  static const Color labelColor = Color.fromRGBO(27, 29, 33, 1);
+  static const Color c040415 = Color(0xff040415);
+  static const Color c8F92A1 = Color(0xff8F92A1);
+  static const Color c171717 = Color(0xff171717);
+  static const Color cFD6B22 = Color(0xffFD6B22);
 }

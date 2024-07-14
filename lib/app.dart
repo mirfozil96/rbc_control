@@ -20,6 +20,7 @@ class App extends StatelessWidget {
       splitScreenMode: true,
       builder: (BuildContext context, Widget? child) {
         return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
           routerConfig: AppRouter.router,
         );
       },

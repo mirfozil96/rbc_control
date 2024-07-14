@@ -69,7 +69,7 @@ flutter:
 
 
   fonts:
-    - family: DM_Sans
+    - family: DM Sans
       fonts:
         - asset: assets/fonts/DM_Sans/static/DMSans-Black.ttf
           weight: 900

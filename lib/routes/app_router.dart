@@ -8,9 +8,6 @@ import "package:rbc_control/presentation/views/auth/set_new_password_page.dart";
 import "package:rbc_control/presentation/views/onboarding/onboarding_view.dart";
 import "package:rbc_control/presentation/views/welcome/otp_verification_page.dart";
 import "package:rbc_control/presentation/views/welcome/welcome_mobile_page.dart";
-// import "../presentation/views/home/home_view.dart";
-// import "../presentation/views/profile/profile_view.dart";
-// import "../presentation/views/splash_screen.dart";
 import "../presentation/views/home/home_page.dart";
 import "../presentation/views/navigation_screen.dart";
 import "../presentation/views/profile/profile_view.dart";
@@ -18,7 +15,7 @@ import "app_route_name.dart";
 
 final class AppRouter {
   static GoRouter router = GoRouter(
-    initialLocation: AppRouteName.onboarding,
+    initialLocation: AppRouteName.login,
     routes: <RouteBase>[
       /// Welcome
       GoRoute(

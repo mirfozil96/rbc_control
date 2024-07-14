@@ -3,15 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rbc_control/core/constants/app_colors.dart';
 
 @immutable
-final class TextStyles{
+final class AppTextStyles{
 
   TextStyle? get headline1 => TextStyle(
       fontFamily: "DM Sans",
       fontWeight: FontWeight.w700,
-      fontSize: 36.sp,
+      fontSize: 35.sp,
       // height: 46,
       letterSpacing: -1.6,
-      color: AppColors.dark,
+      color: AppColors.c1B1D21,
   );
 
   TextStyle? get headline4 => TextStyle(
@@ -19,7 +19,7 @@ final class TextStyles{
       fontWeight: FontWeight.w700,
       fontSize: 18.sp,
       letterSpacing: -0.4,
-      color: AppColors.dark,
+      color: AppColors.c1B1D21,
   );
 
   TextStyle? get headline4Medium => TextStyle(
@@ -43,7 +43,7 @@ final class TextStyles{
     fontWeight: FontWeight.w400,
     fontSize: 24.sp,
     letterSpacing: -0.8,
-    color: AppColors.dark50,
+    color: AppColors.black50,
   );
 
   TextStyle? get paragraph => TextStyle(
@@ -51,7 +51,7 @@ final class TextStyles{
     fontWeight: FontWeight.w400,
     fontSize: 16.sp,
     letterSpacing: -0.36,
-    color: AppColors.dark50,
+    color: AppColors.black50,
   );
 
   TextStyle? get paragraph3 => TextStyle(

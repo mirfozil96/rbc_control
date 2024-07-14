@@ -26,7 +26,7 @@ class CustomOnboardingContainerOne extends StatelessWidget {
         child: Stack(
           children: [
             Container(
-              padding: EdgeInsets.fromLTRB(30.w, 40.h, 30.w, 39.h),
+              padding: EdgeInsets.fromLTRB(30.w, 30.h, 30.w, 30.h),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,

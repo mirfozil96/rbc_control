@@ -41,7 +41,7 @@ final class AppRouter {
       /// login
       GoRoute(
         path: AppRouteName.login,
-        builder: (BuildContext context, GoRouterState state) => LoginPage(),
+        builder: (BuildContext context, GoRouterState state) => const LoginPage(),
         routes: [
           GoRoute(
             path: AppRouteName.register,
@@ -72,7 +72,7 @@ final class AppRouter {
 
       //main
 
-      ShellRoute(
+      ShellRoute( 
         builder: (context, state, child) => PrimaryPage(child),
         routes: [
           GoRoute(

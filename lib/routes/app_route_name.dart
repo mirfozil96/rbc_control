@@ -13,7 +13,6 @@ final class AppRouteName {
   static const String forgetPasswordResetEmail = "forget_password_reset_page";
   static const String setANewPassword = "set_new_password_page";
 
-  static const String navigation = "navigation_screen";
   static const String home = "/home_page";
   static const String profile = "/profile_wiev";
 }

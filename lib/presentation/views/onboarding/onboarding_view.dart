@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:rbc_control/presentation/widgets/custom_button.dart';
-import 'package:rbc_control/presentation/widgets/custom_main_title.dart';
+import 'package:rbc_control/presentation/widgets/custom_onboarding_title.dart';
 import 'package:rbc_control/presentation/widgets/custom_onboarding_container_one.dart';
 import 'package:rbc_control/presentation/widgets/custom_onboarding_container_three.dart';
 import 'package:rbc_control/presentation/widgets/custom_onboarding_container_two.dart';
@@ -37,11 +37,11 @@ class OnboardingView extends ConsumerWidget {
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 34.w),
+              padding: EdgeInsets.symmetric(horizontal: 30.w),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  CustomMainTitle(
+                  CustomOnboardingTitle(
                     title: onboardingState.title,
                     subTitle: onboardingState.subTitle,
                   ),

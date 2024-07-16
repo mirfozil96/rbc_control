@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../core/constants/app_colors.dart';
 
@@ -12,6 +13,7 @@ class CustomTextField extends StatelessWidget {
   final IconButton? suffixIcon;
   final String? Function(String?)? validator;
   final void Function()? onTap;
+  final EdgeInsetsGeometry? padding;
 
   const CustomTextField({
     super.key,
@@ -23,58 +25,63 @@ class CustomTextField extends StatelessWidget {
     required this.textInputAction,
     this.suffixIcon,
     this.validator,
-    this.onTap,
+    this.onTap, 
+    this.padding,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      keyboardType: keyBoardType,
-      obscureText: obscureText ?? false,
-      textInputAction: textInputAction,
-      validator: validator,
-      style: const TextStyle(
-        color: AppColors.black,
-      ),
-      cursorColor: AppColors.fD6B22,
-      decoration: InputDecoration(
-        errorMaxLines: 2,
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(
-            color: AppColors.lFF0000,
-          ),
+    return Padding(
+      padding: padding?? EdgeInsets.symmetric(vertical: 12.h),
+      child: TextFormField(
+        controller: controller,
+        keyboardType: keyBoardType,
+        obscureText: obscureText ?? false,
+        textInputAction: textInputAction,
+        validator: validator,
+        style: const TextStyle(
+          color: AppColors.black,
         ),
-        // labelStyle:  TextStyles()
-        //     .onlineRecordTitleLarge
-        //     ?.copyWith(color: AppColors.lC1C1C1),
-        // floatingLabelStyle:
-        //    TextStyles().subText?.copyWith(fontSize: 19),
-        label: Text(labelText),
-        hintText: hintText,
-        //   hintStyle:  TextStyles().hintText,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(
-            color: AppColors.lD9D9D9,
-            width: 1,
+        cursorColor: AppColors.fD6B22,
+        decoration: InputDecoration(
+          errorMaxLines: 2,
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(
+              color: AppColors.lFF0000,
+            ),
           ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(
-            color: AppColors.lD9D9D9,
+          // labelStyle:  TextStyles()
+          //     .onlineRecordTitleLarge
+          //     ?.copyWith(color: AppColors.lC1C1C1),
+          // floatingLabelStyle:
+          //    TextStyles().subText?.copyWith(fontSize: 19),
+          label: Text(labelText),
+          hintText: hintText,
+          //   hintStyle:  TextStyles().hintText,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16),
+            borderSide: const BorderSide(
+              color: AppColors.lD9D9D9,
+              width: 1,
+            ),
           ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(
-            color: AppColors.fD6B22,
-            width: 1,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(
+              color: AppColors.lD9D9D9,
+            ),
           ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(
+              color: AppColors.fD6B22,
+              width: 1,
+            ),
+          ),
+          labelStyle: TextStyle(),
+          suffixIcon: suffixIcon,
         ),
-        suffixIcon: suffixIcon,
       ),
     );
   }

@@ -79,7 +79,7 @@ class CustomTextField extends StatelessWidget {
               width: 1,
             ),
           ),
-          labelStyle: TextStyle(),
+          // labelStyle: TextStyle(),
           suffixIcon: suffixIcon,
         ),
       ),

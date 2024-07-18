@@ -1,6 +1,11 @@
+import 'dart:async';
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rbc_control/core/constants/app_colors.dart';
+import 'package:rbc_control/core/utils/auth_service.dart';
 import 'package:rbc_control/presentation/widgets/custom_appbar_widget.dart';
 import 'package:rbc_control/presentation/widgets/custom_auth_title.dart';
 import 'package:rbc_control/presentation/widgets/custom_button.dart';
@@ -21,7 +26,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final passwordC = TextEditingController();
   final confirmPassC = TextEditingController();
   bool checkBox = false;
-  void check(){
+  bool isButtonDisabled = false;
+  void check() {
     checkBox = !checkBox;
     setState(() {});
   }
@@ -33,6 +39,16 @@ class _RegisterPageState extends State<RegisterPage> {
     passwordC.dispose();
     confirmPassC.dispose();
     super.dispose();
+  }
+
+  Future<void> register() async {
+    User? user = await AuthService.signUp(
+      context,
+      fullName: "Qwertyu",
+      email: "erkaboyevfazogir98@gmail.com",
+      password: "grand201",
+    );
+    log(user.toString());
   }
 
   @override
@@ -89,9 +105,15 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               CustomButton(
                 text: "Continue",
-                onPressed: () {},
-                backgroundColor: checkBox == false? AppColors.cD9D9D9:null,
-                textColor:checkBox == false? AppColors.black:null,
+                onPressed: () async {
+                  if (checkBox&&!isButtonDisabled) {
+                    isButtonDisabled = true;
+                    await register();
+                    isButtonDisabled = false;
+                  }
+                },
+                backgroundColor: checkBox == false ? AppColors.cD9D9D9 : null,
+                textColor: checkBox == false ? AppColors.black : null,
               ),
               const CustomRichText(
                 text: "Already have an account ? ",

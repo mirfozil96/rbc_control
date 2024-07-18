@@ -11,12 +11,19 @@ import "package:rbc_control/presentation/views/welcome/welcome_mobile_page.dart"
 import "../presentation/views/home/home_page.dart";
 import "../presentation/views/navigation_screen.dart";
 import "../presentation/views/profile/profile_view.dart";
+import "../presentation/views/splash_screen.dart";
 import "app_route_name.dart";
 
 final class AppRouter {
   static GoRouter router = GoRouter(
     initialLocation: AppRouteName.onboarding,
     routes: <RouteBase>[
+  GoRoute(
+        path: AppRouteName.splashPage,
+        builder: (BuildContext context, GoRouterState state) =>
+            const SplashPage(),
+      ),
+
       /// Welcome
       GoRoute(
         path: AppRouteName.welcomeMobile,
@@ -41,7 +48,8 @@ final class AppRouter {
       /// login
       GoRoute(
         path: AppRouteName.login,
-        builder: (BuildContext context, GoRouterState state) => const LoginPage(),
+        builder: (BuildContext context, GoRouterState state) =>
+            const LoginPage(),
         routes: [
           GoRoute(
             path: AppRouteName.register,
@@ -72,18 +80,18 @@ final class AppRouter {
 
       //main
 
-      ShellRoute( 
+      ShellRoute(
         builder: (context, state, child) => PrimaryPage(child),
         routes: [
           GoRoute(
             path: AppRouteName.home,
             builder: (BuildContext context, GoRouterState state) =>
-                const HomeView(),
+                const HomePage(),
           ),
           GoRoute(
             path: AppRouteName.profile,
             builder: (BuildContext context, GoRouterState state) =>
-                const ProfileView(),
+                const ProfilePage(),
           ),
         ],
       ),

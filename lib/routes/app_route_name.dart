@@ -15,4 +15,5 @@ final class AppRouteName {
 
   static const String home = "/home_page";
   static const String profile = "/profile_wiev";
+  static const String splashPage = "/splash_screen";
 }

@@ -1,20 +1,60 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../viewmodels/profile_viewmodel.dart';
+import '../../../data/datasources/app_storage.dart';
+import '../../../routes/app_route_name.dart';
 
-class ProfileView extends ConsumerWidget {
-  const ProfileView({super.key});
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
+
+  Future<void> _signOut(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    await UserStorage.delete(key: StorageKey.userUid);
+    context.go(AppRouteName.splashPage);
+  }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.watch(profileViewModelProvider);
+  Widget build(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Home Screen'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () => _signOut(context),
+          ),
+        ],
+      ),
       body: Center(
-        child: user.name.isNotEmpty
-            ? Text('Profile: ${user.name}')
-            : const CircularProgressIndicator(),
+        child: user != null
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  user.photoURL != null
+                      ? CircleAvatar(
+                          radius: 50,
+                          backgroundImage: NetworkImage(user.photoURL!),
+                        )
+                      : const CircleAvatar(
+                          radius: 50,
+                          child: Icon(Icons.person),
+                        ),
+                  const SizedBox(height: 16),
+                  Text(
+                    user.displayName ?? "No Name",
+                    style: const TextStyle(fontSize: 24),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    user.email ?? "No Email",
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                ],
+              )
+            : const Text('No user information available'),
       ),
     );
   }

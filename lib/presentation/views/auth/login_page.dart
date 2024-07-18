@@ -1,9 +1,18 @@
+// lib/presentation/views/login_screen.dart
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'package:google_sign_in/google_sign_in.dart';
+
+import '../../../core/constants/app_colors.dart';
+import '../../../data/datasources/app_storage.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../routes/app_route_name.dart';
+import '../../widgets/custom_auth_title.dart';
+import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_field.dart';
 import '../../widgets/sign_in_chekbox.dart';
 
@@ -19,7 +28,7 @@ class LoginPageState extends State<LoginPage> {
   final TextEditingController passC = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool vision = false;
-  bool isCheckboxChecked = false;
+  bool checkBox = false;
 
   void togglePasswordVisibility() {
     setState(() {
@@ -27,10 +36,59 @@ class LoginPageState extends State<LoginPage> {
     });
   }
 
-  void toggleCheckbox() {
-    setState(() {
-      isCheckboxChecked = !isCheckboxChecked;
-    });
+  void check() {
+    checkBox = !checkBox;
+    setState(() {});
+  }
+
+  Future<void> _signInWithEmailAndPassword() async {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailC.text,
+        password: passC.text,
+      );
+
+      User? user = userCredential.user;
+      if (user != null) {
+        await UserStorage.store(key: StorageKey.userUid, value: user.uid);
+        context.go(AppRouteName.home);
+      }
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(e.message ?? "An error occurred"),
+      ));
+    }
+  }
+
+  Future<void> _signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      if (googleUser == null) {
+        return;
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+
+      User? user = userCredential.user;
+      if (user != null) {
+        await UserStorage.store(key: StorageKey.userUid, value: user.uid);
+        context.go(AppRouteName.home);
+      }
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(e.message ?? "An error occurred"),
+      ));
+    }
   }
 
   @override
@@ -48,29 +106,9 @@ class LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(height: 40),
-                Text(
-                  'Let’s Sign You In',
-                  style: GoogleFonts.dmSans(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 36,
-                    height: 1.3,
-                    letterSpacing: -1.6,
-                    color: const Color(0xFF1B1D21),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Opacity(
-                  opacity: 0.6,
-                  child: Text(
-                    'Welcome back, you’ve been missed!',
-                    style: GoogleFonts.dmSans(
-                      fontWeight: FontWeight.w400,
-                      fontSize: 24,
-                      height: 1.4,
-                      letterSpacing: -0.8,
-                      color: const Color(0x80000000),
-                    ),
-                  ),
+                const CustomAuthTitle(
+                  title: "'Let’s Sign You In",
+                  subTitle: "Welcome back, you’ve been missed!",
                 ),
                 const SizedBox(height: 40),
                 CustomTextField(
@@ -116,11 +154,10 @@ class LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SignUpCheckbox(
-                      isChecked: isCheckboxChecked,
-                      onChanged: (bool? value) {
-                        toggleCheckbox();
-                      },
+                    Logincheckbox(
+                      checkbox: checkBox,
+                      text: 'Remember me',
+                      onPressedButton: check,
                     ),
                     RichText(
                       text: TextSpan(
@@ -135,36 +172,22 @@ class LoginPageState extends State<LoginPage> {
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
                             context.go(
-                                '${AppRouteName.login}/${AppRouteName.forgetPassword}'); // Example navigation
+                                '${AppRouteName.login}/${AppRouteName.forgetPassword}');
                           },
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 24),
-                MaterialButton(
-                  onPressed: () async {
+                CustomButton(
+                  text: "Sign In",
+                  onPressed: () {
                     if (_formKey.currentState?.validate() ?? false) {
-                      context.go(AppRouteName.home);
+                      _signInWithEmailAndPassword();
                     }
                   },
-                  color: const Color(0xFFFD6B22),
-                  height: 60,
-                  minWidth: double.infinity,
-                  shape: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide.none,
-                  ),
-                  child: Text(
-                    "Sign In",
-                    style: GoogleFonts.dmSans(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                      height: 1.7,
-                      letterSpacing: -0.3,
-                      color: const Color(0xFFFFFFFF),
-                    ),
-                  ),
+                  backgroundColor: checkBox == false ? AppColors.cD9D9D9 : null,
+                  textColor: checkBox == false ? AppColors.black : null,
                 ),
                 const SizedBox(height: 16),
                 Text(
@@ -179,7 +202,7 @@ class LoginPageState extends State<LoginPage> {
                 ),
                 const SizedBox(height: 16),
                 MaterialButton(
-                  onPressed: () {},
+                  onPressed: _signInWithGoogle,
                   padding:
                       const EdgeInsets.symmetric(vertical: 18, horizontal: 1),
                   shape: RoundedRectangleBorder(

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
-
-class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Home View'),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Home Screen'),
+      ),
+      body: const Center(
+        child: Text('home page'),
       ),
     );
   }
 }
-

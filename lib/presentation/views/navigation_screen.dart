@@ -25,22 +25,28 @@ class PrimaryPage extends StatelessWidget {
                     ? AppRouteName.home
                     : index == 1
                         ? AppRouteName.profile
-                        : AppRouteName.profile);
+                        : index == 2
+                            ? AppRouteName.home
+                            : AppRouteName.profile);
               },
               backgroundColor: Colors.transparent,
               useShadow: false,
               items: [
                 DNavigationBarItem(
-                  icon: const Icon(Icons.abc),
-                  activeIcon: const Icon(Icons.abc_sharp),
+                  icon: const Icon(Icons.home),
+                  activeIcon: const Icon(Icons.home_outlined),
                 ),
                 DNavigationBarItem(
-                  icon: const Icon(Icons.abc),
-                  activeIcon: const Icon(Icons.abc_sharp),
+                  icon: const Icon(Icons.notifications),
+                  activeIcon: const Icon(Icons.notifications_outlined),
                 ),
                 DNavigationBarItem(
-                  icon: const Icon(Icons.abc),
-                  activeIcon: const Icon(Icons.abc_sharp),
+                  icon: const Icon(Icons.settings),
+                  activeIcon: const Icon(Icons.settings_outlined),
+                ),
+                DNavigationBarItem(
+                  icon: const Icon(Icons.person),
+                  activeIcon: const Icon(Icons.person_2_outlined),
                 ),
               ],
             ),

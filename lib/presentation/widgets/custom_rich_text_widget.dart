@@ -8,7 +8,7 @@ class CustomRichText extends StatelessWidget {
   final String text;
   final double? textSize;
   final FontWeight? textFontWeight;
-  final String navigateText;
+  final String? navigateText;
   final double? navigateTextSize;
   final FontWeight? navigateTextFontWeight;
   final void Function()? onTap;
@@ -18,11 +18,11 @@ class CustomRichText extends StatelessWidget {
     super.key,
     required this.text,
     this.textSize,
-    required this.navigateText,
+    this.navigateText,
     this.navigateTextSize,
-    this.onTap, 
-    this.textFontWeight, 
-    this.navigateTextFontWeight, 
+    this.onTap,
+    this.textFontWeight,
+    this.navigateTextFontWeight,
     this.padding,
   });
 
@@ -33,10 +33,9 @@ class CustomRichText extends StatelessWidget {
       child: RichText(
         text: TextSpan(
           text: "$text ",
-          style: AppTextStyles().headline4Medium?.copyWith(
-            fontSize: textSize?.sp??13.sp,
-            color: Colors.grey
-          ),
+          style: AppTextStyles()
+              .headline4Medium
+              ?.copyWith(fontSize: textSize?.sp ?? 13.sp, color: Colors.grey),
           children: [
             TextSpan(
               text: navigateText,

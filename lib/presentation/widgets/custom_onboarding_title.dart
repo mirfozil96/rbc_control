@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../core/constants/app_text_styles.dart';
 
-class CustomMainTitle extends StatelessWidget {
+class CustomOnboardingTitle extends StatelessWidget {
   final String title;
   final String subTitle;
-  const CustomMainTitle({
+  const CustomOnboardingTitle({
     super.key,
     required this.title,
     required this.subTitle,

@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rbc_control/firebase_options.dart';
+import 'package:rbc_control/gen/assets.gen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,6 +61,12 @@ class _LogInState extends State<LogIn> {
             )));
       }
     }
+  }
+
+  void signOut() {
+    FirebaseAuth.instance.signOut();
+    FirebaseAuth.instance.currentUser;
+    //print('$user');
   }
 
   @override
@@ -167,6 +174,9 @@ class _LogInState extends State<LogIn> {
           const SizedBox(
             height: 20.0,
           ),
+          const SizedBox(
+            height: 50,
+          ),
           GestureDetector(
             onTap: () {
               Navigator.push(
@@ -197,15 +207,15 @@ class _LogInState extends State<LogIn> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               GestureDetector(
-                onTap: () {
-                  AuthMethods().signInWithGoogle(context);
+                onTap: () async {
+                  User? user = await AuthMethods().signInWithGoogle(context);
+                  if (user != null) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Home()));
+                  }
                 },
-                child: Image.asset(
-                  "assets/images/icons_png/google.png",
-                  height: 45,
-                  width: 45,
-                  fit: BoxFit.cover,
-                ),
+                child: Assets.images.google
+                    .svg(height: 50, width: 50, fit: BoxFit.cover),
               ),
               const SizedBox(
                 width: 30.0,
@@ -242,6 +252,43 @@ class _LogInState extends State<LogIn> {
             ],
           )
         ],
+      ),
+    );
+  }
+}
+
+class Home extends StatefulWidget {
+  const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+void signOut() async {
+  await FirebaseAuth.instance.signOut();
+  // Clearing cached user data
+  await GoogleSignIn().signOut();
+}
+
+class _HomeState extends State<Home> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Home"),
+        centerTitle: true,
+      ),
+      body: GestureDetector(
+        onTap: () {
+          signOut();
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const LogIn()));
+        },
+        child: const Text("sign out user",
+            style: TextStyle(
+                color: Color(0xFF8c8e98),
+                fontSize: 18.0,
+                fontWeight: FontWeight.w500)),
       ),
     );
   }
@@ -434,21 +481,16 @@ class _SignUpState extends State<SignUp> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                "assets/images/icons_png/google.png",
-                height: 45,
-                width: 45,
-                fit: BoxFit.cover,
-              ),
+              Assets.images.google
+                  .svg(height: 16, width: 16, fit: BoxFit.cover),
               const SizedBox(
                 width: 30.0,
               ),
-              Image.asset(
-                "assets/images/icons_png/google.png",
-                height: 50,
-                width: 50,
-                fit: BoxFit.cover,
-              )
+              Assets.images.google
+                  .svg(height: 50, width: 50, fit: BoxFit.cover),
+              const SizedBox(
+                width: 50.0,
+              ),
             ],
           ),
           const SizedBox(
@@ -481,25 +523,6 @@ class _SignUpState extends State<SignUp> {
             ],
           )
         ],
-      ),
-    );
-  }
-}
-
-class Home extends StatefulWidget {
-  const Home({super.key});
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Home"),
-        centerTitle: true,
       ),
     );
   }
@@ -680,38 +703,51 @@ class DatabaseMethods {
 }
 
 class AuthMethods {
-  final FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  getCurrentUser() async {
-    return auth.currentUser;
-  }
+  Future<User?> signInWithGoogle(BuildContext context) async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      if (googleUser == null) {
+        // The user canceled the sign-in
+        return null;
+      }
 
-  signInWithGoogle(BuildContext context) async {
-    final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-    final GoogleSignIn googleSignIn = GoogleSignIn();
-    final GoogleSignInAccount? googleSignInAccount =
-        await googleSignIn.signIn();
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
 
-    final GoogleSignInAuthentication? googleSignInAuthentication =
-        await googleSignInAccount?.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
 
-    final AuthCredential credential = GoogleAuthProvider.credential(
-        idToken: googleSignInAuthentication?.idToken,
-        accessToken: googleSignInAuthentication?.accessToken);
+      UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
 
-    UserCredential result = await firebaseAuth.signInWithCredential(credential);
+      User? user = userCredential.user;
 
-    User? userDetails = result.user;
+      // Check if user exists in Firestore
+      if (user != null) {
+        DocumentSnapshot userDoc =
+            await _firestore.collection('users').doc(user.uid).get();
 
-    Map<String, dynamic> userInfoMap = {
-      "email": userDetails!.email,
-      "name": userDetails.displayName,
-      "imgUrl": userDetails.photoURL,
-      "id": userDetails.uid
-    };
-    await DatabaseMethods().addUser(userDetails.uid, userInfoMap).then((value) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const Home()));
-    });
+        if (!userDoc.exists) {
+          // Create new user document
+          await _firestore.collection('users').doc(user.uid).set({
+            'email': user.email,
+            'displayName': user.displayName,
+          });
+        }
+      }
+
+      return user;
+    } on FirebaseAuthException catch (e) {
+      print(e.message);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(e.message ?? "An error occurred"),
+      ));
+      return null;
+    }
   }
 }

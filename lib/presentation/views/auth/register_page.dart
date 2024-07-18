@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rbc_control/core/constants/app_colors.dart';
 import 'package:rbc_control/core/utils/auth_service.dart';
+import 'package:rbc_control/core/utils/utils.dart';
 import 'package:rbc_control/presentation/widgets/custom_appbar_widget.dart';
 import 'package:rbc_control/presentation/widgets/custom_auth_title.dart';
 import 'package:rbc_control/presentation/widgets/custom_button.dart';
@@ -42,13 +43,23 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future<void> register() async {
-    User? user = await AuthService.signUp(
-      context,
-      fullName: "Qwertyu",
-      email: "erkaboyevfazogir98@gmail.com",
-      password: "grand201",
-    );
-    log(user.toString());
+    if (nameC.text.isEmpty) {
+      Utils.fireSnackBar(context,message: "Name is not filled",backgroundColor: Colors.red,);
+    } else if (nameC.text.isEmpty) {
+      Utils.fireSnackBar(context,message: "Surname is not filled",backgroundColor: Colors.red,);
+    } else if (passwordC.text.length < 6) {
+      Utils.fireSnackBar(context,message: "Password should be more than 6 char",backgroundColor: Colors.red,);
+    } else if (passwordC.text != confirmPassC.text) {
+      Utils.fireSnackBar(context,message: "Confirm password is not same with password",backgroundColor: Colors.red,);
+    }else{
+      User? user = await AuthService.signUp(
+        context,
+        fullName: nameC.text,
+        email: emailC.text,
+        password: passwordC.text,
+      );
+      log(user.toString());
+    }
   }
 
   @override

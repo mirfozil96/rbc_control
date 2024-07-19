@@ -5,8 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rbc_control/core/constants/app_colors.dart';
-import 'package:rbc_control/core/utils/auth_service.dart';
 import 'package:rbc_control/core/utils/utils.dart';
+import 'package:rbc_control/data/datasources/auth_methods.dart';
 import 'package:rbc_control/presentation/widgets/custom_appbar_widget.dart';
 import 'package:rbc_control/presentation/widgets/custom_auth_title.dart';
 import 'package:rbc_control/presentation/widgets/custom_button.dart';
@@ -52,7 +52,7 @@ class _RegisterPageState extends State<RegisterPage> {
     } else if (passwordC.text != confirmPassC.text) {
       Utils.fireSnackBar(context,message: "Confirm password is not same with password",backgroundColor: Colors.red,);
     }else{
-      User? user = await AuthService.signUp(
+      User? user = await AuthMethods.signUp(
         context,
         fullName: nameC.text,
         email: emailC.text,

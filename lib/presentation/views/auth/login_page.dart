@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../../core/constants/app_colors.dart';
-import '../../../data/datasources/app_storage.dart';
+import '../../../core/utils/utils.dart';
 import '../../../gen/assets.gen.dart';
 import '../../../routes/app_route_name.dart';
 import '../../widgets/custom_auth_title.dart';
@@ -51,13 +51,23 @@ class LoginPageState extends State<LoginPage> {
 
       User? user = userCredential.user;
       if (user != null) {
-        await UserStorage.store(key: StorageKey.userUid, value: user.uid);
         context.go(AppRouteName.home);
       }
     } on FirebaseAuthException catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(e.message ?? "An error occurred"),
-      ));
+      if (e.code == 'user-not-found') {
+        Utils.fireSnackBar(
+          context,
+          message: "No User Found for that Email",
+          backgroundColor: Colors.red,
+        );
+      } else if (e.code == 'wrong-password') {
+        Utils.fireSnackBar(
+          context,
+          message: "Wrong Password Provided by User",
+          backgroundColor: Colors.red,
+        );
+        
+      }
     }
   }
 
@@ -81,13 +91,14 @@ class LoginPageState extends State<LoginPage> {
 
       User? user = userCredential.user;
       if (user != null) {
-        await UserStorage.store(key: StorageKey.userUid, value: user.uid);
         context.go(AppRouteName.home);
       }
     } on FirebaseAuthException catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(e.message ?? "An error occurred"),
-      ));
+      Utils.fireSnackBar(
+        context,
+        message: e.message ?? "An error occurred",
+        backgroundColor: Colors.red,
+      );
     }
   }
 
@@ -251,7 +262,7 @@ class LoginPageState extends State<LoginPage> {
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
                             context.go(
-                                '${AppRouteName.login}/${AppRouteName.register}'); // Example navigation
+                                '${AppRouteName.login}/${AppRouteName.register}'); 
                           },
                       ),
                     ],

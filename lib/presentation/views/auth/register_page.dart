@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:rbc_control/core/constants/app_colors.dart';
 import 'package:rbc_control/core/utils/utils.dart';
 import 'package:rbc_control/data/datasources/auth_methods.dart';
@@ -13,6 +14,8 @@ import 'package:rbc_control/presentation/widgets/custom_button.dart';
 import 'package:rbc_control/presentation/widgets/custom_register_checkbox.dart';
 import 'package:rbc_control/presentation/widgets/custom_rich_text_widget.dart';
 import 'package:rbc_control/presentation/widgets/custom_text_field.dart';
+
+import '../../../routes/app_route_name.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -44,14 +47,30 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Future<void> register() async {
     if (nameC.text.isEmpty) {
-      Utils.fireSnackBar(context,message: "Name is not filled",backgroundColor: Colors.red,);
+      Utils.fireSnackBar(
+        context,
+        message: "Name is not filled",
+        backgroundColor: Colors.red,
+      );
     } else if (nameC.text.isEmpty) {
-      Utils.fireSnackBar(context,message: "Surname is not filled",backgroundColor: Colors.red,);
+      Utils.fireSnackBar(
+        context,
+        message: "Surname is not filled",
+        backgroundColor: Colors.red,
+      );
     } else if (passwordC.text.length < 6) {
-      Utils.fireSnackBar(context,message: "Password should be more than 6 char",backgroundColor: Colors.red,);
+      Utils.fireSnackBar(
+        context,
+        message: "Password should be more than 6 char",
+        backgroundColor: Colors.red,
+      );
     } else if (passwordC.text != confirmPassC.text) {
-      Utils.fireSnackBar(context,message: "Confirm password is not same with password",backgroundColor: Colors.red,);
-    }else{
+      Utils.fireSnackBar(
+        context,
+        message: "Confirm password is not same with password",
+        backgroundColor: Colors.red,
+      );
+    } else {
       User? user = await AuthMethods.signUp(
         context,
         fullName: nameC.text,
@@ -59,6 +78,9 @@ class _RegisterPageState extends State<RegisterPage> {
         password: passwordC.text,
       );
       log(user.toString());
+      if (user != null) {
+        context.go(AppRouteName.home);
+      }
     }
   }
 
@@ -91,7 +113,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 hintText: "Email address",
                 controller: emailC,
                 keyBoardType: TextInputType.emailAddress,
-                labelText: "Address",
+                labelText: "Email address",
                 textInputAction: TextInputAction.next,
               ),
               CustomTextField(
@@ -117,7 +139,7 @@ class _RegisterPageState extends State<RegisterPage> {
               CustomButton(
                 text: "Continue",
                 onPressed: () async {
-                  if (checkBox&&!isButtonDisabled) {
+                  if (checkBox && !isButtonDisabled) {
                     isButtonDisabled = true;
                     await register();
                     isButtonDisabled = false;

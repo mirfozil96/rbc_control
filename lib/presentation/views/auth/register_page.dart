@@ -16,8 +16,6 @@ import 'package:rbc_control/presentation/widgets/custom_rich_text_widget.dart';
 import 'package:rbc_control/presentation/widgets/custom_text_field.dart';
 import 'package:rbc_control/routes/app_route_name.dart';
 
-import '../../../routes/app_route_name.dart';
-
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 

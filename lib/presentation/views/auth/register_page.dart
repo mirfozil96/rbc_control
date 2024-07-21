@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:rbc_control/core/constants/app_colors.dart';
 import 'package:rbc_control/core/utils/utils.dart';
 import 'package:rbc_control/data/datasources/auth_methods.dart';
@@ -13,6 +14,7 @@ import 'package:rbc_control/presentation/widgets/custom_button.dart';
 import 'package:rbc_control/presentation/widgets/custom_register_checkbox.dart';
 import 'package:rbc_control/presentation/widgets/custom_rich_text_widget.dart';
 import 'package:rbc_control/presentation/widgets/custom_text_field.dart';
+import 'package:rbc_control/routes/app_route_name.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -58,6 +60,9 @@ class _RegisterPageState extends State<RegisterPage> {
         email: emailC.text,
         password: passwordC.text,
       );
+      if (user!=null) {
+        context.go(AppRouteName.home);
+      }
       log(user.toString());
     }
   }

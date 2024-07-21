@@ -78,9 +78,6 @@ class _RegisterPageState extends State<RegisterPage> {
         email: emailC.text,
         password: passwordC.text,
       );
-      if (user!=null) {
-        context.go(AppRouteName.home);
-      }
       log(user.toString());
       if (user != null) {
         context.go(AppRouteName.home);

@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../../data/datasources/app_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import '../../../routes/app_route_name.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -10,7 +9,7 @@ class ProfilePage extends StatelessWidget {
 
   Future<void> _signOut(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
-    await UserStorage.delete(key: StorageKey.userUid);
+    await GoogleSignIn().signOut();
     context.go(AppRouteName.splashPage);
   }
 

@@ -64,7 +64,7 @@ final class AppRouter {
               GoRoute(
                 path: AppRouteName.forgetPasswordResetEmail,
                 builder: (BuildContext context, GoRouterState state) =>
-                    const ForgetPasswordResetPage(),
+                   ForgetPasswordResetPage(),
                 routes: [
                   GoRoute(
                     path: AppRouteName.setANewPassword,

@@ -50,10 +50,11 @@ class Logincheckbox extends StatelessWidget {
           CustomRichText(
             text: text,
             textFontWeight: textFontWeight ?? FontWeight.w400,
-            textSize: textSize ?? 12.sp,
+            textSize: textSize ?? 15.sp,
             navigateTextFontWeight: navigateTextFontWeight ?? FontWeight.w400,
             navigateTextSize: navigateTextSize ?? 12.sp,
             onTap: onTapText,
+            textColor: Colors.black, // Matn rangini kiriting
           )
         ],
       ),

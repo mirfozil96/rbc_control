@@ -72,7 +72,7 @@ class OnboardingView extends ConsumerWidget {
                           text: "Next",
                           onPressed: () {
                             onboardingState.isFinal == true
-                                ? context.go(AppRouteName.splashPage)
+                                ? context.go(AppRouteName.login)
                                 : onboardingState.pageController.nextPage(
                                     duration: const Duration(milliseconds: 500),
                                     curve: Curves.easeIn,

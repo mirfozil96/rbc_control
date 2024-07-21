@@ -1,8 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 
-import '../../data/datasources/app_storage.dart';
 import '../../routes/app_route_name.dart';
 
 class SplashPage extends StatefulWidget {
@@ -23,14 +23,13 @@ class SplashPageState extends State<SplashPage> {
     // Simulate a delay for the splash screen
     await Future.delayed(const Duration(seconds: 1));
 
-    String? userUid = await UserStorage.load(key: StorageKey.userUid);
-
-    if (userUid != null) {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
       // User is signed in
       context.go(AppRouteName.home);
     } else {
       // User is not signed in
-      context.go(AppRouteName.login);
+      context.go(AppRouteName.onboarding);
     }
   }
 

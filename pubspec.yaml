@@ -16,6 +16,7 @@ dependencies:
 
   flutter_localizations:
     sdk: flutter
+  intl: ^0.19.0
 
   # for design
   cupertino_icons: ^1.0.8
@@ -51,6 +52,7 @@ dependencies:
   cloud_firestore: ^5.1.0
   google_sign_in: ^6.2.1
   google_fonts: ^6.2.1
+  intl_utils: ^2.8.7
 
 
 dev_dependencies:
@@ -70,6 +72,7 @@ flutter_gen:
     flutter_svg: true
 
 flutter:
+  generate: true
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:

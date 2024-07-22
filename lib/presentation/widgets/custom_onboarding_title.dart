@@ -18,6 +18,7 @@ class CustomOnboardingTitle extends StatelessWidget {
       children: [
         Text(
           title,
+          textAlign: TextAlign.center,
           style: AppTextStyles().headline1,
         ),
         SizedBox(height: 18.h),

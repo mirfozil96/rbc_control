@@ -20,8 +20,7 @@ final class AppRouter {
     routes: <RouteBase>[
   GoRoute(
         path: AppRouteName.splashPage,
-        builder: (BuildContext context, GoRouterState state) =>
-            const SplashPage(),
+        builder: (BuildContext context, GoRouterState state) => const SplashPage(),
       ),
 
       /// Welcome

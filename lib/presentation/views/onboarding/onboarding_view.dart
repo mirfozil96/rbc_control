@@ -18,6 +18,9 @@ class OnboardingView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final onboardingState = ref.watch(onboardingViewModelProvider);
     final onboardingViewModel = ref.read(onboardingViewModelProvider.notifier);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      onboardingViewModel.onPageChanged(context, onboardingState.pageIndex);
+    });
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -27,7 +30,7 @@ class OnboardingView extends ConsumerWidget {
             width: double.infinity,
             child: PageView(
               controller: onboardingState.pageController,
-              onPageChanged: onboardingViewModel.onPageChanged,
+              onPageChanged: (index) => onboardingViewModel.onPageChanged(context, index),
               children: const [
                 CustomOnboardingContainerOne(),
                 CustomOnboardingContainerTwo(),

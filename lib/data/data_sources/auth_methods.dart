@@ -1,12 +1,9 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:rbc_control/core/utils/utils.dart';
-
-import 'app_storage.dart';
+import 'package:rbc_control/data/datasources/app_storage.dart';
 
 class AuthMethods {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -126,7 +123,7 @@ class AuthMethods {
 
       return user;
     } on FirebaseAuthException catch (e) {
-      log(e.message.toString());
+      print(e.message);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(e.message ?? "An error occurred"),
       ));
@@ -153,7 +150,7 @@ class AuthMethods {
 
       return user;
     } on FirebaseAuthException catch (e) {
-      log(e.message.toString());
+      print(e.message);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(e.message ?? "An error occurred"),
       ));

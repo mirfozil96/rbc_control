@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rbc_control/l10n/app_localizations.dart';
 
 final onboardingViewModelProvider = StateNotifierProvider<OnboardingViewModel, OnboardingState>((ref) {
   return OnboardingViewModel();
@@ -40,28 +41,28 @@ class OnboardingState {
 class OnboardingViewModel extends StateNotifier<OnboardingState> {
   OnboardingViewModel() : super(OnboardingState(
       pageIndex: 0,
-      title: 'Easy Process',
-      subTitle: 'Find all your house needs in one place.  We provide every service to make your home experience smooth.',
+      title: "",
+      subTitle: "",
       isFinal: false,
       pageController: PageController(),
     ));
 
-  void onPageChanged(int index) {
+  void onPageChanged(BuildContext context, int index) {
     String title;
     String subTitle;
     bool isFinal;
 
     if (index == 0) {
-      title = 'Easy Process';
-      subTitle = 'Find all your house needs in one place.  We provide every service to make your home experience smooth.';
+      title = AppLocalizations.of(context)!.onboardingTitleOne;
+      subTitle = AppLocalizations.of(context)!.onboardingSubTitleOne;
       isFinal = false;
     } else if (index == 1) {
-      title = "Fast Transportation";
-      subTitle = "We provide the best transportation service and organize your furniture properly to prevent any damage.";
+      title = AppLocalizations.of(context)!.onboardingTitleTwo;
+      subTitle = AppLocalizations.of(context)!.onboardingSubTitleTwo;
       isFinal = false;
     } else if (index == 2) {
-      title = "Expert People";
-      subTitle = "We have the best in class individuals working just for you. They are well  trained and capable of handling anything you need.";
+      title = AppLocalizations.of(context)!.onboardingTitleThree;
+      subTitle = AppLocalizations.of(context)!.onboardingSubTitleThree;
       isFinal = true;
     } else {
       title = "";
